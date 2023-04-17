@@ -1,8 +1,8 @@
 import express, { Request, Response, NextFunction } from 'express';
 import swaggerUi from 'swagger-ui-express';
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const swaggerDocument = require('../swagger.json');
-
 import { environment } from './config';
 import {
   ApiError,
@@ -11,6 +11,8 @@ import {
   NotFoundError,
 } from './core/ApiError';
 import Logger from './core/Logger';
+import './database';
+import './cache';
 
 const app = express();
 
