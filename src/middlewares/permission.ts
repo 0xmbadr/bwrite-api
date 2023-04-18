@@ -12,8 +12,6 @@ export default (permission: string) =>
         (entry) => entry === permission,
       );
 
-      console.log(exists);
-
       if (!exists) return next(new ForbiddenError('Permission Denied!'));
 
       next();

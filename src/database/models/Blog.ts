@@ -1,10 +1,10 @@
 import { Schema, model, Types } from 'mongoose';
-import User from './User';
+import { User } from './';
 
 export const DOCUMENT_NAME = 'Blog';
 export const COLLECTION_NAME = 'blogs';
 
-export default interface Blog {
+export interface Blog {
   _id: Types.ObjectId;
   title: string;
   description: string;

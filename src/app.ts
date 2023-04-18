@@ -17,6 +17,9 @@ import routes from './routes/V1';
 
 const app = express();
 
+// MIDLLEWARES
+app.use(express.json());
+
 // Routes
 app.use(
   '/api-docs',

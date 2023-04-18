@@ -10,7 +10,7 @@ export enum RoleCode {
   ADMIN = 'ADMIN',
 }
 
-export default interface Role extends Document {
+export interface Role extends Document {
   code: string;
   status?: boolean;
   createdAt?: Date;

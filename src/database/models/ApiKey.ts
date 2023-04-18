@@ -7,7 +7,7 @@ export enum Permission {
   GENERAL = 'GENERAL',
 }
 
-export default interface ApiKey {
+export interface ApiKey {
   _id: Types.ObjectId;
   key: string;
   version: number;

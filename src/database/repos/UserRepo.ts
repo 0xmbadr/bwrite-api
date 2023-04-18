@@ -1,54 +1,73 @@
-import { Types } from 'mongoose';
-import { InternalError } from '../../core/ApiError';
-import Keystore from '../models/Keystore';
+import { User, UserModel, Keystore } from '../models';
 import { RoleModel } from '../models/Role';
-import User, { UserModel } from '../models/User';
+import { InternalError } from '../../core/ApiError';
+import { Types } from 'mongoose';
 import KeystoreRepo from './KeystoreRepo';
 
-/**
- * @description checks if user with `id` exists.
- */
-const exists = async (id: Types.ObjectId): Promise<boolean> => {
+async function exists(id: Types.ObjectId): Promise<boolean> {
   const user = await UserModel.exists({ _id: id, status: true });
-  return user !== null;
-};
+  return user !== null && user !== undefined;
+}
 
-/**
- * @description returns user's public data.
- */
-const findPublicProfileById = async (
+async function findPrivateProfileById(
   id: Types.ObjectId,
-): Promise<User | null> => {
-  return UserModel.findOne({ _id: id, status: true }).lean().exec();
-};
-
-/**
- * @description returns user's private data.
- */
-const findPrivateProfileById = async (
-  id: Types.ObjectId,
-): Promise<User | null> => {
+): Promise<User | null> {
   return UserModel.findOne({ _id: id, status: true })
     .select('+email')
     .populate({
       path: 'roles',
       match: { status: true },
-      select: { code: 1 }, // return only code field
+      select: { code: 1 },
     })
     .lean<User>()
     .exec();
-};
+}
 
-/**
- *
- * @description: create user and saves his token into db.
- */
-const create = async (
+// contains critical information of the user
+async function findById(id: Types.ObjectId): Promise<User | null> {
+  return UserModel.findOne({ _id: id, status: true })
+    .select('+email +password +roles')
+    .populate({
+      path: 'roles',
+      match: { status: true },
+    })
+    .lean()
+    .exec();
+}
+
+async function findByEmail(email: string): Promise<User | null> {
+  return UserModel.findOne({ email: email })
+    .select(
+      '+email +password +roles +gender +dob +grade +country +state +city +school +bio +hobbies',
+    )
+    .populate({
+      path: 'roles',
+      match: { status: true },
+      select: { code: 1 },
+    })
+    .lean()
+    .exec();
+}
+
+async function findFieldsById(
+  id: Types.ObjectId,
+  ...fields: string[]
+): Promise<User | null> {
+  return UserModel.findOne({ _id: id, status: true }, [...fields])
+    .lean()
+    .exec();
+}
+
+async function findPublicProfileById(id: Types.ObjectId): Promise<User | null> {
+  return UserModel.findOne({ _id: id, status: true }).lean().exec();
+}
+
+async function create(
   user: User,
   accessTokenKey: string,
   refreshTokenKey: string,
   roleCode: string,
-): Promise<{ user: User; keystore: Keystore }> => {
+): Promise<{ user: User; keystore: Keystore }> {
   const now = new Date();
 
   const role = await RoleModel.findOne({ code: roleCode })
@@ -69,17 +88,13 @@ const create = async (
     user: { ...createdUser.toObject(), roles: user.roles },
     keystore: keystore,
   };
-};
+}
 
-/**
- *
- * @description: update user and saves new tokens into db.
- */
-const update = async (
+async function update(
   user: User,
   accessTokenKey: string,
   refreshTokenKey: string,
-): Promise<{ user: User; keystore: Keystore }> => {
+): Promise<{ user: User; keystore: Keystore }> {
   user.updatedAt = new Date();
   await UserModel.updateOne({ _id: user._id }, { $set: { ...user } })
     .lean()
@@ -90,9 +105,9 @@ const update = async (
     refreshTokenKey,
   );
   return { user: user, keystore: keystore };
-};
+}
 
-async function updateUserInfo(user: User): Promise<any> {
+async function updateInfo(user: User): Promise<any> {
   user.updatedAt = new Date();
   return UserModel.updateOne({ _id: user._id }, { $set: { ...user } })
     .lean()
@@ -101,9 +116,12 @@ async function updateUserInfo(user: User): Promise<any> {
 
 export default {
   exists,
-  findPublicProfileById,
   findPrivateProfileById,
+  findById,
+  findByEmail,
+  findFieldsById,
+  findPublicProfileById,
   create,
   update,
-  updateUserInfo,
+  updateInfo,
 };

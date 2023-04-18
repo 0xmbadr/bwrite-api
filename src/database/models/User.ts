@@ -1,10 +1,10 @@
 import { Types, Schema, model } from 'mongoose';
-import Role from './Role';
+import { Role } from './';
 
 export const DOCUMENT_NAME = 'User';
 export const COLLECTION_NAME = 'users';
 
-export default interface User {
+export interface User {
   _id: Types.ObjectId;
   name?: string;
   profilePicUrl?: string;
