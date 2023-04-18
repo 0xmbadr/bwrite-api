@@ -12,7 +12,8 @@ import {
 } from './core/ApiError';
 import Logger from './core/Logger';
 import './database';
-import './cache';
+// import './cache';
+import routes from './routes/V1';
 
 const app = express();
 
@@ -22,6 +23,8 @@ app.use(
   swaggerUi.serve,
   swaggerUi.setup(swaggerDocument, { explorer: true }),
 );
+
+app.use('/api/v1/', routes);
 
 // catch 404
 app.use((req, res, next) => next(new NotFoundError()));
