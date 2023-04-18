@@ -33,7 +33,7 @@ const findPrivateProfileById = async (
     .populate({
       path: 'roles',
       match: { status: true },
-      select: { code: 1 },
+      select: { code: 1 }, // return only code field
     })
     .lean<User>()
     .exec();

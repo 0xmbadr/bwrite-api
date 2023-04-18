@@ -1,4 +1,4 @@
-import { Schema, model, Types } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 
 export const DOCUMENT_NAME = 'Role';
 export const COLLECTION_NAME = 'roles';
@@ -10,8 +10,7 @@ export enum RoleCode {
   ADMIN = 'ADMIN',
 }
 
-export default interface Role {
-  _id: Types.ObjectId;
+export default interface Role extends Document {
   code: string;
   status?: boolean;
   createdAt?: Date;

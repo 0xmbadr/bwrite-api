@@ -22,16 +22,19 @@ const schema = new Schema<User>(
     name: {
       type: Schema.Types.String,
       trim: true,
-      maxlength: 200,
+      maxlength: 30,
+      required: true,
     },
     profilePicUrl: {
       type: Schema.Types.String,
       trim: true,
+      default:
+        'https://lindamood.net/wp-content/uploads/2019/09/Blank-profile-image.jpg',
     },
     email: {
       type: Schema.Types.String,
       unique: true,
-      sparse: true, // allows null
+      sparse: true, // declares a sparse index
       trim: true,
       select: false,
     },
