@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "ts-node-express-boilerplate",
-    "description": "This project serves as a starting point for building TypeScript-based Node.js applications using the Express.js framework.",
+    "title": "bWrite API",
+    "description": "This project is a backed service that has all the features that a blog website would have",
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
@@ -13,6 +13,10 @@
   "basePath": "/",
   "tags": [
     {
+      "name": "Auth",
+      "description": "API for the authentication system."
+    },
+    {
       "name": "Users",
       "description": "API for users in the system"
     }
@@ -21,6 +25,38 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
+    "/signup": {
+      "post": {
+        "tags": ["Auth"],
+        "description": "allow user to signup",
+        "parameters": [
+          {
+            "name": "signupDto",
+            "in": "body",
+            "description": "values needed from a user to signup",
+            "schema": {
+              "$ref": "#/definitions/SignupDto"
+            }
+          }
+        ]
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["Auth"],
+        "description": "allow user to login into hist/her account",
+        "parameters": [
+          {
+            "name": "loginDto",
+            "in": "body",
+            "description": "values needed from a user to login into his account",
+            "schema": {
+              "$ref": "#/definitions/LoginDto"
+            }
+          }
+        ]
+      }
+    },
     "/addUser": {
       "post": {
         "tags": ["Users"],
@@ -107,6 +143,34 @@
     }
   },
   "definitions": {
+    "SignUpDto": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+
+        "password": {
+          "type": "string"
+        },
+        "profilePicUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "LoginDto": {
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+
     "User": {
       "required": ["name", "_id", "companies"],
       "properties": {
