@@ -10,6 +10,7 @@ The API provides the following endpoints:
 
 | Description |  Method   |   endpoint  | 
 | --- | --- | --- | 
-| allow user to signup | `POST` | `/api/1/signup/basic` | 
-| allow user to login | `POST` | `/api/1/login/basic` | 
-| allow user to logout | `DELETE` | `/api/1/logout` | 
+| allow users to signup | `POST` | `/api/v1/signup/basic` | 
+| allow users to login | `POST` | `/api/v1/login/basic` | 
+| allow users to logout | `DELETE` | `/api/v1/logout` | 
+| allow users to refersh their tokens | `POST` | `/api/v1/refersh` | 

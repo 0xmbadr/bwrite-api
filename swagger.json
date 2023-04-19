@@ -58,9 +58,25 @@
       }
     },
     "/logout": {
+      "delete": {
+        "tags": ["Auth"],
+        "description": "allow users to logout from their accounts"
+      }
+    },
+    "/refersh": {
       "post": {
         "tags": ["Auth"],
-        "description": "allow user to logout from their accounts"
+        "description": "allow users to refersh their tokens",
+        "parameters": [
+          {
+            "name": "refershToken",
+            "in": "body",
+            "description": "valid refershToken to generate a new access token",
+            "schema": {
+              "refershToken": "string"
+            }
+          }
+        ]
       }
     },
     "/addUser": {
