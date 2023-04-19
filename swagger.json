@@ -17,6 +17,10 @@
       "description": "API for the authentication system."
     },
     {
+      "name": "Profile",
+      "description": "API for users' profiles"
+    },
+    {
       "name": "Users",
       "description": "API for users in the system"
     }
@@ -74,6 +78,38 @@
             "description": "valid refershToken to generate a new access token",
             "schema": {
               "refershToken": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/Profile": {
+      "get": {
+        "tags": ["Profile"],
+        "description": "allow user to get his private profile data",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "user must be authenticated",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ]
+      }
+    },
+    "/profile": {
+      "put": {
+        "tags": ["Profile"],
+        "description": "allow user to update his private profile data",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "user must be authenticated",
+            "schema": {
+              "$ref": "#/definitions/User"
             }
           }
         ]
@@ -192,8 +228,12 @@
         }
       }
     },
-
     "User": {
+      "required": ["_id"],
+      "properties": {}
+    },
+
+    "_User": {
       "required": ["name", "_id", "companies"],
       "properties": {
         "_id": {
