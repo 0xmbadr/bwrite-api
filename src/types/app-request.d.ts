@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { ApiKey } from '../database/models';
+import { ApiKey, Keystore, User } from '../database/models';
 
 declare interface PublicRequest extends Request {
   apiKey: ApiKey;
@@ -10,4 +10,9 @@ declare interface RoleRequest extends PublicRequest {
 declare interface Tokens {
   accessToken: string;
   refreshToken: string;
+}
+declare interface ProtectedRequest extends RoleRequest {
+  user: User;
+  accessToken: string;
+  keystore: Keystore;
 }

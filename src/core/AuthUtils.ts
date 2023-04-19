@@ -1,7 +1,8 @@
 import { Tokens } from 'app-request';
+import mongoose from 'mongoose';
 import { tokenInfo } from '../config';
 import { User } from '../database/models';
-import { InternalError } from './ApiError';
+import { AuthFailureError, InternalError } from './ApiError';
 import JWT, { JwtPayload } from './JWT';
 
 export const createTokens = async (
@@ -37,4 +38,26 @@ export const createTokens = async (
     accessToken: accessToken,
     refreshToken: refreshToken,
   } as Tokens;
+};
+
+export const getAccessToken = (authorization?: string) => {
+  if (!authorization) throw new AuthFailureError('Invalid Authorization');
+  if (!authorization.startsWith('Bearer '))
+    throw new AuthFailureError('Invalid Authorization');
+  return authorization.split(' ')[1];
+};
+
+export const validateTokenData = (payload: JwtPayload): boolean => {
+  if (
+    !payload ||
+    !payload.iss ||
+    !payload.sub ||
+    !payload.aud ||
+    !payload.prm ||
+    payload.iss !== tokenInfo.issuer ||
+    payload.aud !== tokenInfo.audience ||
+    !mongoose.isValidObjectId(payload.sub)
+  )
+    throw new AuthFailureError('Invalid Access Token');
+  return true;
 };
