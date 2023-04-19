@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { Permission } from '../../database/models/ApiKey';
 import permission from '../../middlewares/permission';
 import apikey from '../../middlewares/apikey';
-import signup from './auth/signup';
+import { signup, login } from './auth';
 
 const router = Router();
 
@@ -12,5 +12,6 @@ router.use(permission(Permission.GENERAL));
 // ---------- -------------- ----------- ----------- ---
 
 router.use('/signup', signup);
+router.use('/login', login);
 
 export default router;

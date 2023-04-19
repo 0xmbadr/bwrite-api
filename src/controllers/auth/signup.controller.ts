@@ -14,6 +14,7 @@ import _ from 'lodash';
 
 const HandleSignUp = asyncHandler(async (req: RoleRequest, res) => {
   const { name, email, password } = req.body;
+
   // 1. Check if user is already registered
   const user = await UserRepo.findByEmail(email);
   if (user) throw new BadRequestError('User already registered');
