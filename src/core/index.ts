@@ -4,7 +4,11 @@ import {
   TokenExpiredError,
   AccessTokenError,
 } from './ApiError';
-import { SuccessResponse, SuccessMsgResponse } from './ApiResponse';
+import {
+  SuccessResponse,
+  SuccessMsgResponse,
+  TokenRefreshResponse,
+} from './ApiResponse';
 import AsyncHandler from './AsyncHandler';
 import { createTokens, getAccessToken, validateTokenData } from './AuthUtils';
 
@@ -24,6 +28,7 @@ export {
   //   ApiResponse
   SuccessResponse,
   SuccessMsgResponse,
+  TokenRefreshResponse,
   // JWT
   JWT,
 };
