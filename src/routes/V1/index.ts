@@ -3,6 +3,7 @@ import { Permission } from '../../database/models/ApiKey';
 import permission from '../../middlewares/permission';
 import apikey from '../../middlewares/apikey';
 import { signup, login, logout, token } from './auth';
+import profile from './user/profile';
 
 const router = Router();
 
@@ -15,5 +16,7 @@ router.use('/signup', signup);
 router.use('/login', login);
 router.use('/logout', logout);
 router.use('/refersh', token);
+
+router.use('/profile', profile);
 
 export default router;

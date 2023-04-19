@@ -2,6 +2,7 @@ import Joi from 'joi';
 import { Request, Response, NextFunction } from 'express';
 import Logger from '../core/Logger';
 import { BadRequestError } from '../core/ApiError';
+import mongoose from 'mongoose';
 
 export const enum Header {
   API_KEY = 'x-api-key',
@@ -21,6 +22,12 @@ export const JoiAuthBearer = () =>
     if (!value.split(' ')[1]) return helpers.error('any.invalid');
     return value;
   }, 'Authorization Header Validation');
+
+export const JoiObjectId = () =>
+  Joi.string().custom((value: string, helpers) => {
+    if (!mongoose.isValidObjectId(value)) return helpers.error('any.invalid');
+    return value;
+  }, 'Object Id Validation');
 
 export default (
     schema: Joi.AnySchema,
