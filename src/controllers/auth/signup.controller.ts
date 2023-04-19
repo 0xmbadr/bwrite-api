@@ -1,18 +1,19 @@
 import crypto from 'crypto';
 
 import bcrypt from 'bcrypt';
-
-import { RoleRequest } from 'app-request';
-import asyncHandler from '../../core/AsyncHandler';
-import UserRepo from '../../database/repos/UserRepo';
-import { RoleCode } from '../../database/models/Role';
-import { User } from '../../database/models';
-import { BadRequestError } from '../../core/ApiError';
-import { createTokens } from '../../core/AuthUtils';
-import { SuccessResponse } from '../../core/ApiResponse';
 import _ from 'lodash';
 
-const HandleSignUp = asyncHandler(async (req: RoleRequest, res) => {
+import {
+  AsyncHandler,
+  BadRequestError,
+  SuccessResponse,
+  createTokens,
+} from '../../core';
+import { UserRepo } from '../../database/repos';
+import { RoleCode, User } from '../../database/models';
+import { RoleRequest } from 'app-request';
+
+const HandleSignUp = AsyncHandler(async (req: RoleRequest, res) => {
   const { name, email, password } = req.body;
 
   // 1. Check if user is already registered

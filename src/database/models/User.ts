@@ -6,10 +6,10 @@ export const COLLECTION_NAME = 'users';
 
 export interface User {
   _id: Types.ObjectId;
-  name?: string;
+  name: string;
   profilePicUrl?: string;
-  email?: string;
-  password?: string;
+  email: string;
+  password: string;
   roles: Role[];
   verified?: boolean;
   status?: boolean;
