@@ -1,4 +1,4 @@
-import Role, { RoleModel } from '../models/Role';
+import { RoleModel, Role } from '../models';
 
 async function findByCode(code: string): Promise<Role | null> {
   return RoleModel.findOne({ code: code, status: true }).lean().exec();

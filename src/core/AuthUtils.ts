@@ -47,6 +47,10 @@ export const getAccessToken = (authorization?: string) => {
   return authorization.split(' ')[1];
 };
 
+/**
+ * check if access token has all the required fields (namely `iss`, `sub`, `aud`, `prm`),
+ * and ensure their validity.
+ */
 export const validateTokenData = (payload: JwtPayload): boolean => {
   if (
     !payload ||

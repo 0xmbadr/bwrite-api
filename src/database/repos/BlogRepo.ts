@@ -1,6 +1,5 @@
-import Blog, { BlogModel } from '../models/Blog';
+import { BlogModel, Blog, User } from '../models/';
 import { Types } from 'mongoose';
-import User from '../models/User';
 
 const AUTHOR_DETAIL = 'name profilePicUrl';
 
