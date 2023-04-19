@@ -57,6 +57,12 @@
         ]
       }
     },
+    "/logout": {
+      "post": {
+        "tags": ["Auth"],
+        "description": "allow user to logout from their accounts"
+      }
+    },
     "/addUser": {
       "post": {
         "tags": ["Users"],

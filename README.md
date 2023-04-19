@@ -12,3 +12,4 @@ The API provides the following endpoints:
 | --- | --- | --- | 
 | allow user to signup | `POST` | `/api/1/signup/basic` | 
 | allow user to login | `POST` | `/api/1/login/basic` | 
+| allow user to logout | `DELETE` | `/api/1/logout` | 
