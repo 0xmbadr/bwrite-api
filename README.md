@@ -21,3 +21,18 @@ The API provides the following endpoints:
 | allow users to get their private profiles details | `GET` | `/api/v1/profile` | 
 | allow users to update their private profile detials | `POST` | `/api/v1/profile` | 
 
+**Blog**
+
+
+| Description |  Method   |   endpoint  | 
+| --- | --- | --- | 
+| allow writers to add their blog | `POST` | `/api/v1/blog/` | 
+
+
+
+
+
+
+
+
+

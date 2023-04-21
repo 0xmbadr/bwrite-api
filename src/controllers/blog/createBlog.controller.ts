@@ -1,0 +1,40 @@
+import { ProtectedRequest } from 'app-request';
+import { BlogRepo } from '../../database/repos';
+import { AsyncHandler, BadRequestError, SuccessResponse } from '../../core';
+import { Blog } from '../../database/models';
+
+/**
+ * format any endpoint so that:
+ *  1. whitespaces are replaced by an empty string
+ *  2. \ charac is replaced by - charac
+ *  3. ? is repalced by empty string
+ *
+ * @example - `blog/intro-to-react` will be `blog-intro-to-react`
+ */
+
+const formatEndpoint = (endpoint: string) =>
+  endpoint.replace(/\s/g, '').replace(/\//g, '-').replace(/\?/g, '');
+
+const HandleCreateBlog = AsyncHandler(async (req: ProtectedRequest, res) => {
+  req.body.blogUrl = formatEndpoint(req.body.blogUrl);
+
+  const blog = await BlogRepo.findUrlIfExists(req.body.blogUrl);
+  if (blog) throw new BadRequestError('Blog with this url already exists');
+
+  const createdBlog = await BlogRepo.create({
+    title: req.body.title,
+    description: req.body.description,
+    draftText: req.body.text,
+    tags: req.body.tags,
+    author: req.user,
+    blogUrl: req.body.blogUrl,
+    imgUrl: req.body.imgUrl,
+    score: req.body.score,
+    createdBy: req.user,
+    updatedBy: req.user,
+  } as Blog);
+
+  new SuccessResponse('Blog created successfully', createdBlog).send(res);
+});
+
+export default HandleCreateBlog;

@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import addRoleCodesToRequest from '../../../middlewares/addRoleCodesToRequest';
-import { AsyncHandler } from '../../../core';
-import { authenticated, authorized } from '../../../middlewares';
+import { authenticated, authorized, validators } from '../../../middlewares';
 import { RoleCode } from '../../../database/models';
+import schema from './blog.schema';
+import { HandleCreateBlog } from '../../../controllers/blog';
 
 const router = Router();
 
@@ -10,11 +11,6 @@ const router = Router();
 router.use(authenticated, addRoleCodesToRequest(RoleCode.WRITER), authorized);
 // ============== =============== ================ =========== ============ ========
 
-router.post(
-  '/',
-  AsyncHandler(async (req, res) => {
-    //
-  }),
-);
+router.post('/', validators(schema.createBlog), HandleCreateBlog);
 
 export default router;
