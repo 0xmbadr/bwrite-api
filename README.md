@@ -32,6 +32,9 @@ The API provides the following endpoints:
 | allow writers to delete their blog | `DELETE` | `/api/v1/blog/writer/:id` | 
 | allow writers to submit their blog | `PUT` | `/api/v1/blog/writer/submit/:id` | 
 | allow writers to withdraw their blog | `PUT` | `/api/v1/blog/writer/withdraw/:id` | 
+| allow writers to get all their draft blog | `GET` | `/api/v1/blog/writer/drafts` | 
+| allow writers to get all their submitted blog | `GET` | `/api/v1/blog/writer/submitted` | 
+| allow writers to get all their published blog | `GET` | `/api/v1/blog/writer/published` | 
 
 
 
