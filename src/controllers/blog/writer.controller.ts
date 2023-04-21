@@ -5,6 +5,7 @@ import {
   BadRequestError,
   SuccessResponse,
   ForbiddenError,
+  SuccessMsgResponse,
 } from '../../core';
 import { Blog } from '../../database/models';
 import { Types } from 'mongoose';
@@ -69,4 +70,18 @@ const HandleUpdateBlog = AsyncHandler(async (req: ProtectedRequest, res) => {
   new SuccessResponse('Blog updated successfully', blog).send(res);
 });
 
-export { HandleCreateBlog, HandleUpdateBlog };
+const HandleSubmitBlog = AsyncHandler(async (req: ProtectedRequest, res) => {
+  const blog = await BlogRepo.findBlogAllDataById(
+    new Types.ObjectId(req.params.id),
+  );
+  if (!blog) throw new BadRequestError('Blog does not exists');
+  if (!blog.author._id.equals(req.user._id))
+    throw new ForbiddenError("You don't have necessary permissions");
+
+  blog.isSubmitted = true;
+  blog.isDraft = false;
+
+  await BlogRepo.update(blog);
+  return new SuccessMsgResponse('Blog submitted successfully').send(res);
+});
+export { HandleCreateBlog, HandleUpdateBlog, HandleSubmitBlog };

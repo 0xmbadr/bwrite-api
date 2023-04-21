@@ -8,7 +8,11 @@ import {
 } from '../../../middlewares';
 import { RoleCode } from '../../../database/models';
 import schema from './blog.schema';
-import { HandleCreateBlog, HandleUpdateBlog } from '../../../controllers/blog';
+import {
+  HandleCreateBlog,
+  HandleUpdateBlog,
+  HandleSubmitBlog,
+} from '../../../controllers/blog';
 
 const router = Router();
 
@@ -22,6 +26,11 @@ router.put(
   validators(schema.blogId, ValidationSource.PARAM),
   validators(schema.updateBlog),
   HandleUpdateBlog,
+);
+router.put(
+  '/submit/:id',
+  validators(schema.blogId, ValidationSource.PARAM),
+  HandleSubmitBlog,
 );
 
 export default router;
