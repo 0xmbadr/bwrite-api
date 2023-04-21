@@ -15,6 +15,7 @@ import {
   HandleWithdrawBlog,
   HandleGetBlog,
   HandleDeleteBlog,
+  HandleGetAllDrafts,
 } from '../../../controllers/blog';
 
 const router = Router();
@@ -23,17 +24,19 @@ const router = Router();
 router.use(authenticated, addRoleCodesToRequest(RoleCode.WRITER), authorized);
 // ============== =============== ================ =========== ============ ========
 
+router.get('/drafts', HandleGetAllDrafts);
+
+router.get(
+  '/:id',
+  validators(schema.blogId, ValidationSource.PARAM),
+  HandleGetBlog,
+);
 router.post('/', validators(schema.createBlog), HandleCreateBlog);
 router.put(
   '/:id',
   validators(schema.blogId, ValidationSource.PARAM),
   validators(schema.updateBlog),
   HandleUpdateBlog,
-);
-router.get(
-  '/:id',
-  validators(schema.blogId, ValidationSource.PARAM),
-  HandleGetBlog,
 );
 router.delete(
   '/:id',

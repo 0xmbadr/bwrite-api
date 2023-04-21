@@ -130,6 +130,11 @@ const HandleDeleteBlog = AsyncHandler(async (req: ProtectedRequest, res) => {
   return new SuccessMsgResponse('Blog deleted successfully').send(res);
 });
 
+const HandleGetAllDrafts = AsyncHandler(async (req: ProtectedRequest, res) => {
+  const blogs = await BlogRepo.findAllDraftsForWriter(req.user);
+  return new SuccessResponse('success', blogs).send(res);
+});
+
 export {
   HandleCreateBlog,
   HandleUpdateBlog,
@@ -137,4 +142,5 @@ export {
   HandleWithdrawBlog,
   HandleGetBlog,
   HandleDeleteBlog,
+  HandleGetAllDrafts,
 };

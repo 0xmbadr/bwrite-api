@@ -5,6 +5,7 @@ import {
   HandleWithdrawBlog,
   HandleGetBlog,
   HandleDeleteBlog,
+  HandleGetAllDrafts,
 } from './writer.controller';
 
 export {
@@ -14,4 +15,5 @@ export {
   HandleWithdrawBlog,
   HandleGetBlog,
   HandleDeleteBlog,
+  HandleGetAllDrafts,
 };
