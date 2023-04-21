@@ -12,6 +12,7 @@ import {
   HandleCreateBlog,
   HandleUpdateBlog,
   HandleSubmitBlog,
+  HandleWithdrawBlog,
 } from '../../../controllers/blog';
 
 const router = Router();
@@ -31,6 +32,11 @@ router.put(
   '/submit/:id',
   validators(schema.blogId, ValidationSource.PARAM),
   HandleSubmitBlog,
+);
+router.put(
+  '/withdraw/:id',
+  validators(schema.blogId, ValidationSource.PARAM),
+  HandleWithdrawBlog,
 );
 
 export default router;
