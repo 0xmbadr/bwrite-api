@@ -17,6 +17,7 @@ import {
   HandleDeleteBlog,
   HandleGetAllDrafts,
   HandleGetAllSubmitted,
+  HandleGetAllPublished,
 } from '../../../controllers/blog';
 
 const router = Router();
@@ -27,6 +28,7 @@ router.use(authenticated, addRoleCodesToRequest(RoleCode.WRITER), authorized);
 
 router.get('/drafts', HandleGetAllDrafts);
 router.get('/submitted', HandleGetAllSubmitted);
+router.get('/published', HandleGetAllPublished);
 
 router.get(
   '/:id',

@@ -7,6 +7,7 @@ import {
   HandleDeleteBlog,
   HandleGetAllDrafts,
   HandleGetAllSubmitted,
+  HandleGetAllPublished,
 } from './writer.controller';
 
 export {
@@ -18,4 +19,5 @@ export {
   HandleDeleteBlog,
   HandleGetAllDrafts,
   HandleGetAllSubmitted,
+  HandleGetAllPublished,
 };
