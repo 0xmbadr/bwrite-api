@@ -135,6 +135,13 @@ const HandleGetAllDrafts = AsyncHandler(async (req: ProtectedRequest, res) => {
   return new SuccessResponse('success', blogs).send(res);
 });
 
+const HandleGetAllSubmitted = AsyncHandler(
+  async (req: ProtectedRequest, res) => {
+    const blogs = await BlogRepo.findAllSubmissionsForWriter(req.user);
+    return new SuccessResponse('success', blogs).send(res);
+  },
+);
+
 export {
   HandleCreateBlog,
   HandleUpdateBlog,
@@ -143,4 +150,5 @@ export {
   HandleGetBlog,
   HandleDeleteBlog,
   HandleGetAllDrafts,
+  HandleGetAllSubmitted,
 };
