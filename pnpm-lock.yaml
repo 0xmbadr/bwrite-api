@@ -10,6 +10,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.58.0
   '@typescript-eslint/parser': ^5.58.0
   bcrypt: ^5.1.0
+  bson: ^5.2.0
   concurrently: ^8.0.1
   dotenv: ^16.0.3
   eslint: ^8.38.0
@@ -50,6 +51,7 @@ devDependencies:
   '@types/swagger-ui-express': 4.1.3
   '@typescript-eslint/eslint-plugin': 5.58.0_gjoxkwycl3ml7yxlw3iuo7gyna
   '@typescript-eslint/parser': 5.58.0_voubu7prgxjfsfbgx5d4sqnwiy
+  bson: 5.2.0
   eslint: 8.38.0
   nodemon: 2.0.22
   typescript: 5.0.4
@@ -614,7 +616,6 @@ packages:
   /bson/5.2.0:
     resolution: {integrity: sha512-HevkSpDbpUfsrHWmWiAsNavANKYIErV2ePXllp1bwq5CDreAaFVj6RVlZpJnxK4WWDCJ/5jMUpaY6G526q3Hjg==}
     engines: {node: '>=14.20.1'}
-    dev: false
 
   /buffer-equal-constant-time/1.0.1:
     resolution: {integrity: sha512-zRpUiDwd/xk6ADqPMATG8vc9VPrkck7T07OIx0gnjmJAnHnTVXNQG3vfvWNuiZIkwu9KrKdA1iJKfsfTVxE6NA==}

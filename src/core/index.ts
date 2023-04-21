@@ -3,6 +3,7 @@ import {
   BadRequestError,
   TokenExpiredError,
   AccessTokenError,
+  ForbiddenError,
 } from './ApiError';
 import {
   SuccessResponse,
@@ -25,6 +26,7 @@ export {
   BadRequestError,
   TokenExpiredError,
   AccessTokenError,
+  ForbiddenError,
   //   ApiResponse
   SuccessResponse,
   SuccessMsgResponse,

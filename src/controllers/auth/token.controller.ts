@@ -1,6 +1,5 @@
 import crypto from 'crypto';
 import { ProtectedRequest } from 'app-request';
-import { ObjectId } from 'mongodb';
 import { KeystoreRepo, UserRepo } from '../../database/repos';
 import {
   AsyncHandler,
@@ -11,6 +10,7 @@ import {
   validateTokenData,
   TokenRefreshResponse,
 } from '../../core';
+import { Types } from 'mongoose';
 
 const HandleRefreshToken = AsyncHandler(async (req: ProtectedRequest, res) => {
   req.accessToken = getAccessToken(req.headers.authorization);
@@ -18,7 +18,9 @@ const HandleRefreshToken = AsyncHandler(async (req: ProtectedRequest, res) => {
   const accessTokenPayload = await JWT.decode(req.accessToken);
   validateTokenData(accessTokenPayload);
 
-  const user = await UserRepo.findById(new ObjectId(accessTokenPayload.sub));
+  const user = await UserRepo.findById(
+    new Types.ObjectId(accessTokenPayload.sub),
+  );
   if (!user) throw new AuthFailureError('User not registered');
   req.user = user;
 

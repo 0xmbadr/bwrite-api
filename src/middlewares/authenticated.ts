@@ -12,7 +12,7 @@ import {
 } from '../core';
 import { ProtectedRequest } from 'app-request';
 import { UserRepo, KeystoreRepo } from '../database/repos';
-import { ObjectId } from 'mongodb';
+import { Types } from 'mongoose';
 
 const router = Router();
 
@@ -27,7 +27,7 @@ export default router.use(
         validateTokenData(payload);
         console.log(`paylod: ` + payload.exp);
 
-        const user = await UserRepo.findById(new ObjectId(payload.sub));
+        const user = await UserRepo.findById(new Types.ObjectId(payload.sub));
         if (!user) throw new AuthFailureError('User not registered');
         req.user = user;
 

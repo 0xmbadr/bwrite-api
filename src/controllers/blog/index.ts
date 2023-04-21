@@ -1,2 +1,3 @@
-import HandleCreateBlog from './createBlog.controller';
-export { HandleCreateBlog };
+import { HandleCreateBlog, HandleUpdateBlog } from './writer.controller';
+
+export { HandleCreateBlog, HandleUpdateBlog };
