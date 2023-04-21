@@ -99,9 +99,20 @@ const HandleWithdrawBlog = AsyncHandler(async (req: ProtectedRequest, res) => {
   await BlogRepo.update(blog);
   return new SuccessMsgResponse('Blog withdrawn successfully').send(res);
 });
+
+const HandleGetBlog = AsyncHandler(async (req: ProtectedRequest, res) => {
+  const blog = await BlogRepo.findBlogAllDataById(
+    new Types.ObjectId(req.params.id),
+  );
+  if (!blog) throw new BadRequestError('Blog does not exists');
+  if (!blog.author._id.equals(req.user._id))
+    throw new ForbiddenError("You don't have necessary permissions");
+  new SuccessResponse('success', blog).send(res);
+});
 export {
   HandleCreateBlog,
   HandleUpdateBlog,
   HandleSubmitBlog,
   HandleWithdrawBlog,
+  HandleGetBlog,
 };
