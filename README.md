@@ -26,8 +26,9 @@ The API provides the following endpoints:
 
 | Description |  Method   |   endpoint  | 
 | --- | --- | --- | 
-| allow writers to add their blog | `POST` | `/api/v1/blog/` | 
-| allow writers to update their blog | `PUT` | `/api/v1/blog/:id` | 
+| allow writers to add their blog | `POST` | `/api/v1/blog/writer` | 
+| allow writers to update their blog | `PUT` | `/api/v1/blog/writer/:id` | 
+| allow writers to submit their blog | `PUT` | `/api/v1/blog/writer/submit/:id` | 
 
 
 
