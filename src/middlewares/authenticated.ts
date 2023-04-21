@@ -25,7 +25,6 @@ export default router.use(
       try {
         const payload = await JWT.validate(req.accessToken);
         validateTokenData(payload);
-        console.log(`paylod: ` + payload.exp);
 
         const user = await UserRepo.findById(new Types.ObjectId(payload.sub));
         if (!user) throw new AuthFailureError('User not registered');

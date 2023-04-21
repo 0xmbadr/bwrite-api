@@ -109,10 +109,32 @@ const HandleGetBlog = AsyncHandler(async (req: ProtectedRequest, res) => {
     throw new ForbiddenError("You don't have necessary permissions");
   new SuccessResponse('success', blog).send(res);
 });
+
+const HandleDeleteBlog = AsyncHandler(async (req: ProtectedRequest, res) => {
+  const blog = await BlogRepo.findBlogAllDataById(
+    new Types.ObjectId(req.params.id),
+  );
+  if (!blog) throw new BadRequestError('Blog does not exists');
+  if (!blog.author._id.equals(req.user._id))
+    throw new ForbiddenError("You don't have necessary permissions");
+
+  if (blog.isPublished) {
+    blog.isDraft = false;
+    // revert to the original state
+    blog.draftText = blog.text;
+  } else {
+    blog.status = false;
+  }
+
+  await BlogRepo.update(blog);
+  return new SuccessMsgResponse('Blog deleted successfully').send(res);
+});
+
 export {
   HandleCreateBlog,
   HandleUpdateBlog,
   HandleSubmitBlog,
   HandleWithdrawBlog,
   HandleGetBlog,
+  HandleDeleteBlog,
 };

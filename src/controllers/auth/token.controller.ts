@@ -27,8 +27,6 @@ const HandleRefreshToken = AsyncHandler(async (req: ProtectedRequest, res) => {
   const refreshTokenPayload = await JWT.validate(req.body.refreshToken);
   validateTokenData(refreshTokenPayload);
 
-  console.log('RefershToken validated');
-
   if (accessTokenPayload.sub !== refreshTokenPayload.sub)
     throw new AuthFailureError('Invalid access token');
 
