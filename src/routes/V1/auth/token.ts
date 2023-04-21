@@ -1,8 +1,7 @@
 import { Router } from 'express';
 import validators, { ValidationSource } from '../../../middlewares/validators';
-import authenticated from '../../../middlewares/authenticated';
 import { HandleRefreshToken } from './../../../controllers/auth';
-import schema from './schema';
+import schema from './auth.schema';
 
 const router = Router();
 

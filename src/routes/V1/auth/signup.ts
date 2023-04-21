@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import validateSignUpSchema from '../../../middlewares/validators';
 import { HandleSignUp } from './../../../controllers/auth';
-import schema from './schema';
+import schema from './auth.schema';
 
 const router = Router();
 

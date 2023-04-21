@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import validateLoginSchema from '../../../middlewares/validators';
 import { HandleLogin } from './../../../controllers/auth';
-import schema from './schema';
+import schema from './auth.schema';
 
 const router = Router();
 
