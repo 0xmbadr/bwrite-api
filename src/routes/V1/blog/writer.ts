@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import addRoleCodesToRequest from '../../../middlewares/addRoleCodesToRequest';
 import {
   authenticated,
   authorized,
   validators,
   ValidationSource,
+  addRoleCodesToRequest,
 } from '../../../middlewares';
 import { RoleCode } from '../../../database/models';
 import schema from './blog.schema';

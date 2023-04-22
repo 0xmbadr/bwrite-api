@@ -9,6 +9,11 @@ import {
   HandleGetAllSubmitted,
   HandleGetAllPublished,
 } from './writer.controller';
+import {
+  HandleGetAllEditorDrafts,
+  HandleGetAllEditorSubmitted,
+  HandleGetAllEditorPublished,
+} from './editor.controller';
 
 export {
   HandleCreateBlog,
@@ -20,4 +25,7 @@ export {
   HandleGetAllDrafts,
   HandleGetAllSubmitted,
   HandleGetAllPublished,
+  HandleGetAllEditorDrafts,
+  HandleGetAllEditorSubmitted,
+  HandleGetAllEditorPublished,
 };
