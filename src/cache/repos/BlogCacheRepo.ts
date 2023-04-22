@@ -1,7 +1,9 @@
 import { Types } from 'mongoose';
+import { addMillisToCurrentDate } from '../../core/utils';
+import { caching } from '../../config';
 import { Blog } from '../../database/models';
 import { getKeyForId, getKeyForUrl } from '../keys';
-import { getJson } from '../query';
+import { getJson, setJson } from '../query';
 
 const fetchById = async (blogId: Types.ObjectId) => {
   return getJson<Blog>(getKeyForId(blogId));
@@ -11,4 +13,12 @@ const fetchByUrl = async (blogUrl: string) => {
   return getJson<Blog>(getKeyForUrl(blogUrl));
 };
 
-export { fetchById, fetchByUrl };
+const save = async (blog: Blog) => {
+  return setJson(
+    getKeyForId(blog._id),
+    { ...blog },
+    addMillisToCurrentDate(caching.contentCacheDuration),
+  );
+};
+
+export { fetchById, fetchByUrl, save };

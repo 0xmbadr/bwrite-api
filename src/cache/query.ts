@@ -2,18 +2,23 @@ import cache from '.';
 import { DynamicKeyType, Key } from './keys';
 
 export enum TYPES {
-  LIST = 'list',
   STRING = 'string',
-  HASH = 'hash',
-  ZSET = 'zset',
-  SET = 'set',
 }
 
-export async function getValue(key: Key | DynamicKeyType) {
+export const getValue = (key: Key | DynamicKeyType) => {
   return cache.get(key);
-}
+};
 
-export async function getJson<T>(key: Key | DynamicKeyType) {
+export const setValue = async (
+  key: Key | DynamicKeyType,
+  value: string | number,
+  expireAt: Date | null = null,
+) => {
+  if (expireAt) return cache.pSetEx(key, expireAt.getTime(), `${value}`);
+  else return cache.set(key, `${value}`);
+};
+
+export const getJson = async <T>(key: Key | DynamicKeyType) => {
   const type = await cache.type(key);
   if (type !== TYPES.STRING) return null;
 
@@ -21,4 +26,13 @@ export async function getJson<T>(key: Key | DynamicKeyType) {
   if (json) return JSON.parse(json) as T;
 
   return null;
-}
+};
+
+export const setJson = async (
+  key: Key | DynamicKeyType,
+  value: Record<string, unknown>,
+  expireAt: Date | null = null,
+) => {
+  const json = JSON.stringify(value);
+  return await setValue(key, json, expireAt);
+};

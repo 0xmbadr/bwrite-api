@@ -24,3 +24,9 @@ export const tokenInfo = {
   issuer: process.env.TOKEN_ISSUER || '',
   audience: process.env.TOKEN_AUDIENCE || '',
 };
+
+export const caching = {
+  contentCacheDuration: parseInt(
+    process.env.CONTENT_CACHE_DURATION_MILLIS || '600000',
+  ),
+};
