@@ -19,3 +19,7 @@ export function getDynamicKey(key: DynamicKey, suffix: string) {
 export const getKeyForId = (blogId: Types.ObjectId) => {
   return getDynamicKey(DynamicKey.BLOG, blogId.toHexString());
 };
+
+export const getKeyForUrl = (blogUrl: string) => {
+  return getDynamicKey(DynamicKey.BLOG, blogUrl);
+};
