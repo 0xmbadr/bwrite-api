@@ -4,6 +4,7 @@ import {
   AsyncHandler,
   BadRequestError,
   ForbiddenError,
+  SuccessMsgResponse,
   SuccessResponse,
 } from '../../core';
 import { Types } from 'mongoose';
@@ -42,9 +43,29 @@ const HandleGetSingleBlogForEditor = AsyncHandler(
     new SuccessResponse('success', blog).send(res);
   },
 );
+
+const HandlePublishSingleBlog = AsyncHandler(
+  async (req: ProtectedRequest, res) => {
+    const blog = await BlogRepo.findBlogAllDataById(
+      new Types.ObjectId(req.params.id),
+    );
+    if (!blog) throw new BadRequestError('Blog does not exists');
+
+    blog.isDraft = false;
+    blog.isSubmitted = false;
+    blog.isPublished = true;
+    blog.text = blog.draftText;
+    if (!blog.publishedAt) blog.publishedAt = new Date();
+
+    await BlogRepo.update(blog);
+    return new SuccessMsgResponse('Blog published successfully').send(res);
+  },
+);
+
 export {
   HandleGetAllEditorDrafts,
   HandleGetAllEditorSubmitted,
   HandleGetAllEditorPublished,
   HandleGetSingleBlogForEditor,
+  HandlePublishSingleBlog,
 };

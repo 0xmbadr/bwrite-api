@@ -14,6 +14,7 @@ import {
   HandleGetAllEditorSubmitted,
   HandleGetAllEditorPublished,
   HandleGetSingleBlogForEditor,
+  HandlePublishSingleBlog,
 } from './editor.controller';
 
 export {
@@ -30,4 +31,5 @@ export {
   HandleGetAllEditorSubmitted,
   HandleGetAllEditorPublished,
   HandleGetSingleBlogForEditor,
+  HandlePublishSingleBlog,
 };
