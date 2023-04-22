@@ -14,6 +14,7 @@ import {
   HandleGetAllEditorPublished,
   HandleGetSingleBlogForEditor,
   HandlePublishSingleBlog,
+  HandleUnpublishSingleBlog,
 } from '../../../controllers/blog';
 import blogSchema from './blog.schema';
 
@@ -39,5 +40,10 @@ router.put(
   '/publish/:id',
   validators(blogSchema.blogId, ValidationSource.PARAM),
   HandlePublishSingleBlog,
+);
+router.put(
+  '/unpublish/:id',
+  validators(blogSchema.blogId, ValidationSource.PARAM),
+  HandleUnpublishSingleBlog,
 );
 export default router;

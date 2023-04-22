@@ -62,10 +62,27 @@ const HandlePublishSingleBlog = AsyncHandler(
   },
 );
 
+const HandleUnpublishSingleBlog = AsyncHandler(
+  async (req: ProtectedRequest, res) => {
+    const blog = await BlogRepo.findBlogAllDataById(
+      new Types.ObjectId(req.params.id),
+    );
+    if (!blog) throw new BadRequestError('Blog does not exists');
+
+    blog.isDraft = true;
+    blog.isSubmitted = false;
+    blog.isPublished = false;
+
+    await BlogRepo.update(blog);
+    return new SuccessMsgResponse('Blog unpublished successfully').send(res);
+  },
+);
+
 export {
   HandleGetAllEditorDrafts,
   HandleGetAllEditorSubmitted,
   HandleGetAllEditorPublished,
   HandleGetSingleBlogForEditor,
   HandlePublishSingleBlog,
+  HandleUnpublishSingleBlog,
 };
