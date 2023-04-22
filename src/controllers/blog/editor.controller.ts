@@ -78,6 +78,20 @@ const HandleUnpublishSingleBlog = AsyncHandler(
   },
 );
 
+const HandleDeleteSingleBlog = AsyncHandler(
+  async (req: ProtectedRequest, res) => {
+    const blog = await BlogRepo.findBlogAllDataById(
+      new Types.ObjectId(req.params.id),
+    );
+    if (!blog) throw new BadRequestError('Blog does not exists');
+
+    blog.status = false;
+
+    await BlogRepo.update(blog);
+    return new SuccessMsgResponse('Blog deleted successfully').send(res);
+  },
+);
+
 export {
   HandleGetAllEditorDrafts,
   HandleGetAllEditorSubmitted,
@@ -85,4 +99,5 @@ export {
   HandleGetSingleBlogForEditor,
   HandlePublishSingleBlog,
   HandleUnpublishSingleBlog,
+  HandleDeleteSingleBlog,
 };

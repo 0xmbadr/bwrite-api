@@ -16,6 +16,7 @@ import {
   HandleGetSingleBlogForEditor,
   HandlePublishSingleBlog,
   HandleUnpublishSingleBlog,
+  HandleDeleteSingleBlog,
 } from './editor.controller';
 
 export {
@@ -34,4 +35,5 @@ export {
   HandleGetSingleBlogForEditor,
   HandlePublishSingleBlog,
   HandleUnpublishSingleBlog,
+  HandleDeleteSingleBlog,
 };

@@ -39,6 +39,7 @@ The API provides the following endpoints:
 | allow **editors** to get all submitted blogs | `GET` | `/api/v1/blog/editor/submitted` | 
 | allow **editors** to get all drafts blogs | `GET` | `/api/v1/blog/editor/drafts` | 
 | allow **editors** to get data of a single blog | `GET` | `/api/v1/blog/editor/:id` | 
+| allow **editors** to delete a blog | `DELETE` | `/api/v1/blog/editor/:id` | 
 | allow **editors** to publish a blog | `PUT` | `/api/v1/blog/editor/publish/:id` | 
 | allow **editors** to unpublish a blog | `PUT` | `/api/v1/blog/editor/unpublish/:id` | 
 
