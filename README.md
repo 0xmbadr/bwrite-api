@@ -38,6 +38,7 @@ The API provides the following endpoints:
 | allow **editors** to get all published blogs | `GET` | `/api/v1/blog/editor/published` | 
 | allow **editors** to get all submitted blogs | `GET` | `/api/v1/blog/editor/submitted` | 
 | allow **editors** to get all drafts blogs | `GET` | `/api/v1/blog/editor/drafts` | 
+| allow **editors** to get data of a single blog | `GET` | `/api/v1/blog/editor/:id` | 
 
 
 
