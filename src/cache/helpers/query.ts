@@ -38,6 +38,22 @@ export const setJson = async (
   return await setValue(key, json, expireAt);
 };
 
+export async function setList(
+  key: Key | DynamicKeyType,
+  list: any[],
+  expireAt: Date | null = null,
+) {
+  const multi = cache.multi();
+  const values: any[] = [];
+  for (const i in list) {
+    values[i] = JSON.stringify(list[i]);
+  }
+  multi.del(key);
+  multi.rPush(key, values);
+  if (expireAt) multi.pExpireAt(key, expireAt.getTime());
+  return await multi.exec();
+}
+
 export const getListRange = async <T>(
   key: Key | DynamicKeyType,
   start = 0,
@@ -49,6 +65,6 @@ export const getListRange = async <T>(
   const list = await cache.lRange(key, start, end);
   if (!list) return null;
 
-  const data = list.map((entry) => JSON.parse(entry) as T);
+  const data = list.map((entry: string) => JSON.parse(entry) as T);
   return data;
 };
