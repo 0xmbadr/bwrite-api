@@ -21,6 +21,7 @@ import {
 import {
   HandleGetSimilarBlogs,
   HandleGetLatestBlogs,
+  HandleGetBlogsByTags,
 } from './blogs.controller';
 import { AsyncHandler, SuccessResponse, NotFoundError } from '../../core';
 import { fetchByUrl, save, fetchById } from './../../cache/repos/BlogCacheRepo';
@@ -76,4 +77,5 @@ export {
   GetBlogById,
   HandleGetSimilarBlogs,
   HandleGetLatestBlogs,
+  HandleGetBlogsByTags,
 };

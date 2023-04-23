@@ -46,6 +46,7 @@ The API provides the following endpoints:
 | allow **learners** to get a blog by id (Cache used) | `GET` | `/api/v1/blog/id/:id` | 
 | allow **learners** to get similar blogs | `GET` | `/api/v1/blog/similar/id/:id` | 
 | allow **learners** to get latest blogs | `GET` | `/api/v1/blog/latest` | 
+| allow **learners** to get blogs by tags | `GET` | `/api/v1/blog/tag/:tag` | 
 
 
 

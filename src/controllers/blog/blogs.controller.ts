@@ -30,4 +30,13 @@ const HandleGetLatestBlogs = AsyncHandler(async (req, res) => {
   );
   return new SuccessResponse('success', blogs).send(res);
 });
-export { HandleGetSimilarBlogs, HandleGetLatestBlogs };
+
+const HandleGetBlogsByTags = AsyncHandler(async (req, res) => {
+  const blogs = await BlogRepo.findByTagAndPaginated(
+    req.params.tag,
+    parseInt(req.query.pageNumber as string),
+    parseInt(req.query.pageItemCount as string),
+  );
+  return new SuccessResponse('success', blogs).send(res);
+});
+export { HandleGetSimilarBlogs, HandleGetLatestBlogs, HandleGetBlogsByTags };
