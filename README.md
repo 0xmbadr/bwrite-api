@@ -44,6 +44,8 @@ The API provides the following endpoints:
 | allow **editors** to unpublish a blog | `PUT` | `/api/v1/blog/editor/unpublish/:id` | 
 | allow **learners** to get a blog by url(Cache used) | `GET` | `/api/v1/blog/url` | 
 | allow **learners** to get a blog by id (Cache used) | `GET` | `/api/v1/blog/id/:id` | 
+| allow **learners** to get similar blogs | `GET` | `/api/v1/blog/similar/id/:id` | 
+| allow **learners** to get latest blogs | `GET` | `/api/v1/blog/latest` | 
 
 
 
