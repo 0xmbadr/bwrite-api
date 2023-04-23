@@ -1,6 +1,9 @@
 <h1 align="center">bWrite API</h1>
 
 
+This is a backend API for a blog application with different user roles such as writers, editors, admin, and normal users (called learners).The API provides a set of endpoints that enable writers and editors to perform various operations, such as creating, reading, updating, and deleting blogs.
+
+The API is built using modern web development frameworks and technologies, such as Node.js, Express, Mongoose. It uses authentication and authorization mechanisms, such as JSON Web Tokens (JWT) with public/private keys, to ensure secure access to the data and restrict unauthorized actions.
 
 ### Usage
 
