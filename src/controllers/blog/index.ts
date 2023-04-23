@@ -19,8 +19,9 @@ import {
   HandleDeleteSingleBlog,
 } from './editor.controller';
 import { AsyncHandler, SuccessResponse, NotFoundError } from '../../core';
-import { fetchByUrl, save } from './../../cache/repos/BlogCacheRepo';
+import { fetchByUrl, save, fetchById } from './../../cache/repos/BlogCacheRepo';
 import { BlogRepo } from '../../database/repos';
+import { Types } from 'mongoose';
 
 const GetBlogByURL = AsyncHandler(async (req, res) => {
   const blogUrl = req.query.endpoint as string;
@@ -28,6 +29,21 @@ const GetBlogByURL = AsyncHandler(async (req, res) => {
 
   if (!blog) {
     blog = await BlogRepo.findPublishedByUrl(blogUrl);
+    if (blog) await save(blog);
+  }
+
+  if (!blog) throw new NotFoundError('Blog not found');
+  return new SuccessResponse('success', blog).send(res);
+});
+
+const GetBlogById = AsyncHandler(async (req, res) => {
+  const blogId = new Types.ObjectId(req.params.id);
+  let blog = await fetchById(blogId);
+
+  if (!blog) {
+    blog = await BlogRepo.findInfoForPublishedById(
+      new Types.ObjectId(req.params.id),
+    );
     if (blog) await save(blog);
   }
 
@@ -53,4 +69,5 @@ export {
   HandleUnpublishSingleBlog,
   HandleDeleteSingleBlog,
   GetBlogByURL,
+  GetBlogById,
 };
