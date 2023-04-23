@@ -4,6 +4,7 @@ import {
   TokenExpiredError,
   AccessTokenError,
   ForbiddenError,
+  NotFoundError,
 } from './ApiError';
 import {
   SuccessResponse,
@@ -26,6 +27,7 @@ export {
   BadRequestError,
   TokenExpiredError,
   AccessTokenError,
+  NotFoundError,
   ForbiddenError,
   //   ApiResponse
   SuccessResponse,

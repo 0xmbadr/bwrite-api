@@ -42,6 +42,7 @@ The API provides the following endpoints:
 | allow **editors** to delete a blog | `DELETE` | `/api/v1/blog/editor/:id` | 
 | allow **editors** to publish a blog | `PUT` | `/api/v1/blog/editor/publish/:id` | 
 | allow **editors** to unpublish a blog | `PUT` | `/api/v1/blog/editor/unpublish/:id` | 
+| allow **learners** to get a blog (Cache used) | `GET` | `/api/v1/blog/url` | 
 
 
 

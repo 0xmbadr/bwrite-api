@@ -12,7 +12,7 @@ import {
 } from './core/ApiError';
 import Logger from './core/Logger';
 import './database';
-// import './cache';
+import './cache';
 import routes from './routes/V1';
 
 const app = express();

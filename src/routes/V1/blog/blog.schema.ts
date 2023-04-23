@@ -23,4 +23,7 @@ export default {
   blogId: Joi.object().keys({
     id: JoiObjectId().required(),
   }),
+  blogUrl: Joi.object().keys({
+    endpoint: JoiUrlEndpoint().required().max(200),
+  }),
 };
