@@ -26,4 +26,14 @@ export default {
   blogUrl: Joi.object().keys({
     endpoint: JoiUrlEndpoint().required().max(200),
   }),
+  blogTag: Joi.object().keys({
+    tag: Joi.string().required(),
+  }),
+  pagination: Joi.object().keys({
+    pageNumber: Joi.number().required().integer().min(1),
+    pageItemCount: Joi.number().required().integer().min(1),
+  }),
+  authorId: Joi.object().keys({
+    id: JoiObjectId().required(),
+  }),
 };

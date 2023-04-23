@@ -18,6 +18,7 @@ import {
   HandleUnpublishSingleBlog,
   HandleDeleteSingleBlog,
 } from './editor.controller';
+import { HandleGetSimilarBlogs } from './blogs.controller';
 import { AsyncHandler, SuccessResponse, NotFoundError } from '../../core';
 import { fetchByUrl, save, fetchById } from './../../cache/repos/BlogCacheRepo';
 import { BlogRepo } from '../../database/repos';
@@ -70,4 +71,5 @@ export {
   HandleDeleteSingleBlog,
   GetBlogByURL,
   GetBlogById,
+  HandleGetSimilarBlogs,
 };

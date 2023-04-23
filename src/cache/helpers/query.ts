@@ -3,6 +3,7 @@ import { DynamicKeyType, Key } from './keys';
 
 export enum TYPES {
   STRING = 'string',
+  LIST = 'list',
 }
 
 export const getValue = (key: Key | DynamicKeyType) => {
@@ -35,4 +36,19 @@ export const setJson = async (
 ) => {
   const json = JSON.stringify(value);
   return await setValue(key, json, expireAt);
+};
+
+export const getListRange = async <T>(
+  key: Key | DynamicKeyType,
+  start = 0,
+  end = -1,
+) => {
+  const type = await cache.type(key);
+  if (type !== TYPES.LIST) return null;
+
+  const list = await cache.lRange(key, start, end);
+  if (!list) return null;
+
+  const data = list.map((entry) => JSON.parse(entry) as T);
+  return data;
 };

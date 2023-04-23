@@ -23,3 +23,7 @@ export const getKeyForId = (blogId: Types.ObjectId) => {
 export const getKeyForUrl = (blogUrl: string) => {
   return getDynamicKey(DynamicKey.BLOG, blogUrl);
 };
+
+export const getKeyForSimilar = (blogId: Types.ObjectId) => {
+  return getDynamicKey(DynamicKey.BLOGS_SIMILAR, blogId.toHexString());
+};
