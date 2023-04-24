@@ -5,6 +5,10 @@ This is a backend API for a blog application with different user roles such as w
 
 The API is built using modern web development frameworks and technologies, such as Node.js, Express, Mongoose. It uses authentication and authorization mechanisms, such as JSON Web Tokens (JWT) with public/private keys, to ensure secure access to the data and restrict unauthorized actions.
 
+### How Request is handled? 
+
+![](./doc/req-handling.png)
+
 ### Usage
 
 The API provides the following endpoints:
